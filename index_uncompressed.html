@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+<html xmlns="http://www.w3.org/1999/xhtml"> 
+<head> 
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
+<title>Facebook Instant Search!</title> 
+<meta content='Facebook Instant Search! Search All Public Facebook Posts Instantly' name='description'/> 
+<meta content='Facebook search, instant facebook search, facebook instant' name='keywords'/> 
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
+<style type="text/css">
+body {
+background-color:#E7EBF2;
+color:#000;
+font-family:Tahoma, Verdana , Georgia, "Times New Roman", Arial , sans-serif;
+font-size:12px;
+}
+#container
+{
+margin:0 auto;
+width:900px;
+}
+.search_input
+{
+font:bold 16px Tahoma;
+color:#666;
+border:1px solid #c0c0c0;
+border-right:1px solid #c0c0c0;
+background:#ffffff !important;
+background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#efefef));
+background-image:-moz-linear-gradient(top, #fff, #fff);
+background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#efefef));
+filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ffffff, endColorStr=#efefef);
+height:1.9331em;
+padding:0 0.5em;
+cursor:normal;
+width:650px;
+white-space:nowrap;
+overflow:visible; /* fixes width in IE7 */
+outline:0 none /* removes focus outline in IE */
+input::-moz-focus-inner {border:none} /* removes focus outline in FF */
+-moz-border-radius: 0.1em;
+border-radius: 0.1em;
+-moz-box-shadow: 0 0 0.1em 0 #c0c0c0;
+-webkit-box-shadow: 0 0 0.1em 0 #c0c0c0;
+box-shadow: 0 0 0.1em 0 #c0c0c0;
+}
+#input_box
+{
+text-align:left;
+width:740px;
+}
+#result
+{
+text-align:left;
+}
+#no
+{
+padding:30px;
+font-size:36px;
+color:#000000;
+}
+.title
+{
+font-family:Tahoma, Verdana , Georgia, "Times New Roman", Arial , sans-serif;
+color:#000000;
+font-size:16px;
+padding-bottom:5px;
+}
+.title a
+{
+color:#0000DD;
+text-decoration:none;
+}
+.desc
+{
+color:#000000;
+padding-bottom:5px;
+}
+.url
+{
+color:#339933;
+}
+.webresult
+{
+margin-top:10px;
+padding-bottom:10px;
+padding-left:5px;
+border-bottom:1px groove #330066;
+}
+.social-single {
+margin: 17px 0 0 0;
+}
+#twitterbutton, #likebutton, #stumblebutton, #sharebutton, #linkedinshare {
+float: left;
+display: block;
+}
+#likebutton {
+margin-top:0px;
+margin-left:-3px;
+}
+#sharebutton {
+margin-left:0px;
+margin-top:0px;
+margin-right: 5px;
+}
+#stumblebutton {
+margin-left: 20px;
+margin-top: 1px;
+}
+#linkedinshare {
+margin-left: 20px;
+margin-top: 1px;
+}
+#plusonebutton {
+margin-left: 20px;
+margin-top: 1px;
+}
+</style>
+<script type="text/javascript"> 
+$(document).ready(function(){
+$(".search_input").focus();
+$(".search_input").keyup(function(){
+var search_input = $(this).val();
+var keyword= encodeURIComponent(search_input);
+var yt_url='http://graph.facebook.com/search?q='+keyword+'&type=post&limit=20'; 
+$.ajax({
+type: "GET",
+url: yt_url,
+dataType:"jsonp",
+success: function(response){
+$("#result").html('');
+if(response.data.length){
+$.each(response.data, function(i,data){
+var profile=data.from.id;
+var title=data.from.name;
+var dis=data.message;
+var url='Type:- ' +data.type;
+var mstory=data.story;
+if (dis.length) {
+   var final="<div class='webresult'><div class='title'><a href='http://www.fb.com/profile.php?id="+profile+"' target='_blank'>"+title+"</a></div><div class='desc'>"+dis+"</div><div class='url'>"+url+"</div></div>";
+} else if (mstory) {
+   var final="<div class='webresult'><div class='title'><a href="+profile+">"+title+"</a></div><div class='desc'>"+mstory+"</div><div class='url'>"+url+"</div></div>";
+}
+$("#result").append(final);
+});
+} else {
+$("#result").html("<div id='no'>Wo...woo..! Wait on buddy what are exactly lookin for ??</div>");
+} 
+}  
+}); }); });
+</script>
+<script type="text/javascript" src="http://apis.google.com/js/plusone.js"></script>
+<script type="text/javascript">
+(function() {
+var s = document.createElement('SCRIPT'), s1 = document.getElementsByTagName('SCRIPT')[0];
+s.type = 'text/javascript';
+s.async = true;
+s.src = 'http://widgets.digg.com/buttons.js';
+s1.parentNode.insertBefore(s, s1);
+})();
+</script>
+</head> 
+<body> 
+<div id="container"> 
+<div id="input_box"> 
+<a href="http://teckzone.in/fbinstant/"><img src="facebook_instant_logo.jpg" /></a><br/> 
+<input type="text" class='search_input'  />
+<div class="social-single">
+<div id="twitterbutton"><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script><div> <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://teckzone.in/fbinstant/" data-counturl="http://teckzone.in/fbinstant/" data-text="Facebook Instant Search!" data-via="TeckZoneIn" data-related="TeckZoneIn">Tweet</a></div></div>
+<div id="sharebutton" style="padding-top:1px;"><a name="fb_share" type="button_count" href="http://www.facebook.com/sharer.php">Share</a><script src="http://static.ak.fbcdn.net/connect.php/js/FB.Share" type="text/javascript"></script></div>
+<div id="stumblebutton"><script src="http://www.stumbleupon.com/hostedbadge.php?s=1"></script></div>
+<div id="plusonebutton"><g:plusone size="medium"></g:plusone><a class="DiggThisButton DiggCompact"></a></div></div><br />
+<p>Created By: <a href="http://www.fb.com/TheVirendraRajput" target="_blank">Virendra Rajput</a></p><hr />
+<br/>
+</div> 
+<div id="result"> 
+</div> 
+</div>
+<!-- Start of StatCounter Code for Default Guide -->
+<script type="text/javascript">
+var sc_project=7726188; 
+var sc_invisible=1; 
+var sc_security="8ce1bef6"; 
+</script>
+<script type="text/javascript"
+src="http://www.statcounter.com/counter/counter_xhtml.js"></script>
+<noscript><div class="statcounter"><a title="tumblr hit
+counter" href="http://statcounter.com/tumblr/"
+class="statcounter"><img class="statcounter"
+src="http://c.statcounter.com/7726188/0/8ce1bef6/1/"
+alt="tumblr hit counter" /></a></div></noscript>
+<!-- End of StatCounter Code for Default Guide -->
+</body> 
+</html> 
