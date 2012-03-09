@@ -1,127 +1,27 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
-<html xmlns="http://www.w3.org/1999/xhtml"> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:og="http://ogp.me/ns#" xmlns:fb="http://www.facebook.com/2008/fbml">
 <head> 
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" /> 
-<title>Facebook Instant Search!</title> 
-<meta content='Facebook Instant Search! Search All Public Facebook Posts Instantly' name='description'/> 
+<link rel="SHORTCUT ICON" href="myico.png"/>
+<title>Facebook Instant Search! Search Public Facebook Status's Instantly</title>
+<meta property="og:title" content="Facebook Instant Search!"/>
+<meta property="og:type" content="website"/>
+<meta property="og:url" content="http://teckzone.in/fbinstant/"/>
+<meta property="og:image" content="http://teckzone.in/fbinstant/facebook_instant_logo.jpg"/>
+<meta property="og:site_name" content="TeckZone"/>
+<meta property="fb:admins" content="100000109274242"/>
+<meta property="og:description" content="Facebook Instant Search! Search All Public Facebook Posts Instantly"/>
+<meta content='Facebook Instant Search- Search All Public Facebook Posts Instantly' name='description'/> 
 <meta content='Facebook search, instant facebook search, facebook instant' name='keywords'/> 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
-<style type="text/css">
-body {
-background-color:#E7EBF2;
-color:#000;
-font-family:Tahoma, Verdana , Georgia, "Times New Roman", Arial , sans-serif;
-font-size:12px;
-}
-#container
-{
-margin:0 auto;
-width:900px;
-}
-.search_input
-{
-font:bold 16px Tahoma;
-color:#666;
-border:1px solid #c0c0c0;
-border-right:1px solid #c0c0c0;
-background:#ffffff !important;
-background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#efefef));
-background-image:-moz-linear-gradient(top, #fff, #fff);
-background-image:-webkit-gradient(linear, 0% 0%, 0% 100%, from(#fff), to(#efefef));
-filter:progid:DXImageTransform.Microsoft.Gradient(startColorStr=#ffffff, endColorStr=#efefef);
-height:1.9331em;
-padding:0 0.5em;
-cursor:normal;
-width:650px;
-white-space:nowrap;
-overflow:visible; /* fixes width in IE7 */
-outline:0 none /* removes focus outline in IE */
-input::-moz-focus-inner {border:none} /* removes focus outline in FF */
--moz-border-radius: 0.1em;
-border-radius: 0.1em;
--moz-box-shadow: 0 0 0.1em 0 #c0c0c0;
--webkit-box-shadow: 0 0 0.1em 0 #c0c0c0;
-box-shadow: 0 0 0.1em 0 #c0c0c0;
-}
-#input_box
-{
-text-align:left;
-width:740px;
-}
-#result
-{
-text-align:left;
-}
-#no
-{
-padding:30px;
-font-size:36px;
-color:#000000;
-}
-.title
-{
-font-family:Tahoma, Verdana , Georgia, "Times New Roman", Arial , sans-serif;
-color:#000000;
-font-size:16px;
-padding-bottom:5px;
-}
-.title a
-{
-color:#0000DD;
-text-decoration:none;
-}
-.desc
-{
-color:#000000;
-padding-bottom:5px;
-}
-.url
-{
-color:#339933;
-}
-.webresult
-{
-margin-top:10px;
-padding-bottom:10px;
-padding-left:5px;
-border-bottom:1px groove #330066;
-}
-.social-single {
-margin: 17px 0 0 0;
-}
-#twitterbutton, #likebutton, #stumblebutton, #sharebutton, #linkedinshare {
-float: left;
-display: block;
-}
-#likebutton {
-margin-top:0px;
-margin-left:-3px;
-}
-#sharebutton {
-margin-left:0px;
-margin-top:0px;
-margin-right: 5px;
-}
-#stumblebutton {
-margin-left: 20px;
-margin-top: 1px;
-}
-#linkedinshare {
-margin-left: 20px;
-margin-top: 1px;
-}
-#plusonebutton {
-margin-left: 20px;
-margin-top: 1px;
-}
-</style>
+<link rel="stylesheet" href="style.css" media="screen" />
 <script type="text/javascript"> 
 $(document).ready(function(){
 $(".search_input").focus();
 $(".search_input").keyup(function(){
 var search_input = $(this).val();
 var keyword= encodeURIComponent(search_input);
-var yt_url='http://graph.facebook.com/search?q='+keyword+'&type=post&limit=20'; 
+var yt_url='http://graph.facebook.com/search?fields=id,from,message,type&q='+keyword+'&type=post&limit=20'; 
 $.ajax({
 type: "GET",
 url: yt_url,
@@ -133,12 +33,9 @@ $.each(response.data, function(i,data){
 var profile=data.from.id;
 var title=data.from.name;
 var dis=data.message;
-var url='Type:- ' +data.type;
-var mstory=data.story;
+var url='Status Update';
 if (dis.length) {
-   var final="<div class='webresult'><div class='title'><a href='http://www.fb.com/profile.php?id="+profile+"' target='_blank'>"+title+"</a></div><div class='desc'>"+dis+"</div><div class='url'>"+url+"</div></div>";
-} else if (mstory) {
-   var final="<div class='webresult'><div class='title'><a href="+profile+">"+title+"</a></div><div class='desc'>"+mstory+"</div><div class='url'>"+url+"</div></div>";
+  var final="<div class='webresult'><div class='title'><a href='http://www.fb.com/profile.php?id="+profile+"' target='_blank'>"+title+"</a></div><div class='desc'>"+dis+"</div><div class='url'>"+url+"</div></div>";
 }
 $("#result").append(final);
 });
@@ -162,7 +59,7 @@ s1.parentNode.insertBefore(s, s1);
 <body> 
 <div id="container"> 
 <div id="input_box"> 
-<a href="http://teckzone.in/fbinstant/"><img src="facebook_instant_logo.jpg" /></a><br/> 
+<a href="http://teckzone.in/fbinstant/"><img alt="Facebook Instant Logo" src="facebook_instant_logo.jpg" /></a><br/>
 <input type="text" class='search_input'  />
 <div class="social-single">
 <div id="twitterbutton"><script src="http://platform.twitter.com/widgets.js" type="text/javascript"></script><div> <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://teckzone.in/fbinstant/" data-counturl="http://teckzone.in/fbinstant/" data-text="Facebook Instant Search!" data-via="TeckZoneIn" data-related="TeckZoneIn">Tweet</a></div></div>
